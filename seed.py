@@ -11,10 +11,12 @@ fake = Faker()
 
 if __name__ == "__main__":
     with app.app_context():
+
+        import ipdb; ipdb.set_trace()
         Doctor.query.delete()
         Patient.query.delete()
         Appointment.query.delete()
-        doctors: list[Doctor] = []
+        doctors = []
         for _ in range(10):
             doctors.append(
                 Doctor(
@@ -41,6 +43,7 @@ if __name__ == "__main__":
             appointments.append(
                 Appointment(
                     day=choice(weekdays),
+                    #uses the integer foreign key NOT a class instance
                     doctor_id=choice(doctors).id,
                     patient_id=choice(patients).id,
                 )
